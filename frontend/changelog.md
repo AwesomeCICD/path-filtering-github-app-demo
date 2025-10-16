@@ -8,6 +8,9 @@ All notable changes to this project will be documented in this file.
 - Initial frontend setup - 2025-10-16
 - Added login page component - 2025-10-16
 - Added dashboard layout - 2025-10-16
+- Added user profile page - 2025-10-16
+- Added notification system - 2025-10-16
+- Added dark mode toggle - 2025-10-16
 
 ### Changed
 - Updated styling to match design system - 2025-10-16

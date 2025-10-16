@@ -39,7 +39,6 @@ jobs:
       - run:
           name: Trigger a pipeline for each changed file
           command: |
-            "${CIRCLE_TOKEN:?CIRCLE_TOKEN is required}"
             while IFS= read -r value; do
               [[ -z "$value" || "$value" == "#"* || "$value" == ".circleci/config.yml" ]] && continue
               echo "Triggering pipeline for: $value"
