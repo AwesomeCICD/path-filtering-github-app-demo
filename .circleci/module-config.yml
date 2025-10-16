@@ -1,0 +1,38 @@
+version: 2.1
+
+parameters:
+  changed-module:
+    default: "some-value"
+    type: string
+  files-changed:
+    type: string
+    default: ''
+  frontend:
+    type: boolean
+    default: false
+  backend:
+    type: boolean
+    default: false
+  infra:
+    type: boolean
+    default: false
+  run-all:
+    type: boolean
+    default: false
+
+jobs:
+  run_job:
+    docker:
+      - image: cimg/base:stable
+    parameters:
+      module:
+        type: string
+    steps:
+      - run: echo <<parameters.module>>
+
+workflows:
+  build:
+    jobs:
+      - run_job:
+           name: "run_job-<<pipeline.parameters.changed-module>>"
+           module: <<pipeline.parameters.changed-module>>
