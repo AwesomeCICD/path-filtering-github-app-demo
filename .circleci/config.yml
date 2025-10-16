@@ -1,0 +1,53 @@
+version: 2.1
+
+setup: true
+
+orbs:
+  path-filtering: circleci/path-filtering@2.0.4
+
+jobs:
+  setup-job:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - checkout
+      - path-filtering/set-parameters:
+          base-revision: <<pipeline.git.branch>>
+          output-path: /tmp/pipeline-parameters.json
+          mapping: |
+            project1/.* project-one true
+            project2/.* project-two true
+            project3/.* project-three true
+            shared-things/.* run-them-all true
+      - run: cat /tmp/pipeline-parameters.json
+      - run: cat /tmp/files-changed-list
+      - run:
+    name: Trigger a pipeline for each changed file
+    parameters:
+      file-list:
+        type: string
+        default: "/tmp/files-changed-list"
+      project-slug:
+        type: string
+        default: "gh/vjpandian/path-filtering-demo"
+      pipeline-definition-id:
+        type: string
+        default: "8ecc8741-e286-4ecd-812e-fe162368d33b"
+    command: |
+      : "${CIRCLE_TOKEN:?CIRCLE_TOKEN is required}"
+      while IFS= read -r value; do
+        [[ -z "$value" || "$value" == "#"* || "$value" == ".circleci/config.yml" ]] && continue
+        echo "Triggering pipeline for: $value"
+        curl -s -X POST "https://circleci.com/api/v2/project/<<parameters.project-slug>>/pipeline/run" \
+          -H "Circle-Token: $CIRCLE_TOKEN" -H "Content-Type: application/json" \
+          -d "{\"definition_id\":\"<<parameters.pipeline-definition-id>>\",\"config\":{\"branch\":\"<<pipeline.git.branch>>\"},\"checkout\":{\"branch\":\"<<pipeline.git.branch>>\"},\"parameters\":{\"changed-module\":\"$value\"}}"
+      done < "<<parameters.file-list>>"
+
+workflows:
+  setup-workflow:
+    jobs:
+      - setup-job:
+           context: org-global
+
+    
