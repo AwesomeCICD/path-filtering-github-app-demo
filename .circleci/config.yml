@@ -52,6 +52,6 @@ workflows:
   setup-workflow:
     jobs:
       - setup-job:
-           context: org-global
+           context: vijay-context
 
     

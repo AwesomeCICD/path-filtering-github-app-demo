@@ -6,9 +6,15 @@ All notable changes to this project will be documented in this file.
 
 ### Added
 - Initial backend setup - 2025-10-16
+- Added user authentication module - 2025-10-16
+- Added database migration scripts - 2025-10-16
 
 ### Changed
+- Updated API response format - 2025-10-16
+- Improved error handling - 2025-10-16
 
 ### Fixed
+- Fixed memory leak in connection pool - 2025-10-16
+- Fixed authentication token expiration bug - 2025-10-16
 
 ### Removed
