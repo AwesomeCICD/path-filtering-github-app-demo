@@ -11,6 +11,7 @@ All notable changes to this project will be documented in this file.
 - Added CDN configuration - 2025-10-16
 - Added disaster recovery plan - 2025-10-16
 - Added container orchestration setup - 2025-10-16
+- Added more check endpoints - 2025-10-16
 
 ### Changed
 - Updated security group rules - 2025-10-16

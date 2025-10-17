@@ -11,6 +11,7 @@ All notable changes to this project will be documented in this file.
 - Added user profile page - 2025-10-16
 - Added notification system - 2025-10-16
 - Added dark mode toggle - 2025-10-16
+- Added more check endpoints - 2025-10-16
 
 ### Changed
 - Updated styling to match design system - 2025-10-16
