@@ -21,6 +21,9 @@ parameters:
     default: false
 
 jobs:
+  success-status-job:
+    type: no-op
+    
   run_job:
     docker:
       - image: cimg/base:stable
@@ -36,3 +39,7 @@ workflows:
       - run_job:
            name: "run_job-<<pipeline.parameters.changed-module>>"
            module: <<pipeline.parameters.changed-module>>
+      - success-status-job:
+           requires:
+              - "run_job-<<pipeline.parameters.changed-module>>":
+                    - success
