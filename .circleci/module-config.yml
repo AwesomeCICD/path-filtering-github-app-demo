@@ -55,3 +55,4 @@ workflows:
            requires:
               - "run_job-<<pipeline.parameters.changed-module>>":
                     - failed
+                    - infrastructure_fail
