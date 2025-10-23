@@ -55,4 +55,4 @@ workflows:
            name: status-job
            requires:
               - "run_job-<<pipeline.parameters.changed-module>>":
-                    - success
+                    - failed
