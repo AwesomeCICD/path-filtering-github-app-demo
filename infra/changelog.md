@@ -20,5 +20,6 @@ All notable changes to this project will be documented in this file.
 ### Fixed
 - Fixed DNS configuration issues - 2025-10-16
 - Fixed load balancer health check timeouts - 2025-10-16
+- Fixed load balancer health check timeouts - 2025-10-22
 
 ### Removed
