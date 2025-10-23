@@ -25,6 +25,7 @@ jobs:
     docker:
       - image: cimg/base:stable
     steps:
+      - run: echo "hello!"
       - run: exit 1
       
   success-status-job:
