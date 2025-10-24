@@ -44,15 +44,16 @@ workflows:
            name: "run_job-<<pipeline.parameters.changed-module>>"
            module: <<pipeline.parameters.changed-module>>
       - status-job:
+           name: status-job-success
            post-steps:
              - run: exit 0
            requires:
               - "run_job-<<pipeline.parameters.changed-module>>":
                     - success
       - status-job:
+           name: status-job-failed
            post-steps:
              - run: exit 1
            requires:
               - "run_job-<<pipeline.parameters.changed-module>>":
                     - failed
-                    - infrastructure_fail
