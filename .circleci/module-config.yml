@@ -47,6 +47,7 @@ workflows:
       - run_job:
            name: "run_job-<<pipeline.parameters.changed-module>>"
            module: <<pipeline.parameters.changed-module>>
+           filters: pipeline.trigger.source == "api"
       - success-status-job:
            name: status-job
            requires:
