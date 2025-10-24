@@ -21,15 +21,11 @@ parameters:
     default: false
 
 jobs:
-  failed-status-job:
+  status-job:
     docker:
       - image: cimg/base:stable
     steps:
       - run: echo "hello!"
-      - run: exit 1
-      
-  success-status-job:
-    type: no-op
     
   run_job:
     docker:
@@ -47,14 +43,17 @@ workflows:
       - run_job:
            name: "run_job-<<pipeline.parameters.changed-module>>"
            module: <<pipeline.parameters.changed-module>>
-           filters: pipeline.trigger.source == "api"
-      - success-status-job:
-           name: status-job
+      - status-job:
+           name: status-job-success
+           post-steps:
+             - run: exit 0
            requires:
               - "run_job-<<pipeline.parameters.changed-module>>":
                     - success
-      - failed-status-job:
-           name: status-job
+      - status-job:
+           name: status-job-failed
+           post-steps:
+             - run: exit 1
            requires:
               - "run_job-<<pipeline.parameters.changed-module>>":
                     - failed
