@@ -20,5 +20,6 @@ All notable changes to this project will be documented in this file.
 ### Fixed
 - Fixed responsive layout on mobile devices - 2025-10-16
 - Fixed form validation errors - 2025-10-16
+- Fixed dark mode toggle - 2025-10-22
 
 ### Removed
