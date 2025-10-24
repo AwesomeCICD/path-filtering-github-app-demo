@@ -35,6 +35,7 @@ jobs:
         type: string
     steps:
       - run: echo <<parameters.module>>
+      - run: exit 1
 
 workflows:
   build:
