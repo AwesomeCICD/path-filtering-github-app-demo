@@ -35,7 +35,6 @@ jobs:
         type: string
     steps:
       - run: echo <<parameters.module>>
-      - run: exit 1
 
 workflows:
   build:
@@ -45,15 +44,6 @@ workflows:
            module: <<pipeline.parameters.changed-module>>
       - status-job:
            name: status-job-success
-           post-steps:
-             - run: exit 0
            requires:
               - "run_job-<<pipeline.parameters.changed-module>>":
                     - success
-      - status-job:
-           name: status-job-failed
-           post-steps:
-             - run: exit 1
-           requires:
-              - "run_job-<<pipeline.parameters.changed-module>>":
-                    - failed
