@@ -42,6 +42,7 @@ workflows:
       - run_job:
            name: "run_job-<<pipeline.parameters.changed-module>>"
            module: <<pipeline.parameters.changed-module>>
+           filters: pipeline.git.branch == "main"
       - status-job:
            name: status-job-success
            requires:
